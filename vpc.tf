@@ -1,11 +1,4 @@
-#module "network" {
- # source  = "app.terraform.io/ETHANNERONE-training/network/google"
- # version = "3.4.0"
-  # insert required variables here
-  #project_id   = "var.project"
- # network_name = "gaurav-network"
-  #routing_mode = "GLOBAL"
-#}
+
 module "vpc" {
     source  = "terraform-google-modules/network/google"
     version = "~> 3.0"
@@ -58,13 +51,6 @@ module "vpc" {
             tags                   = "egress-inet"
             next_hop_internet      = "true"
         },
-        {
-            name                   = "app-proxy"
-            description            = "route through proxy to reach app"
-            destination_range      = "10.50.10.0/24"
-            tags                   = "app-proxy"
-            next_hop_instance      = "app-proxy-instance"
-            next_hop_instance_zone = var.zone
-        },
+        
     ]
 }
